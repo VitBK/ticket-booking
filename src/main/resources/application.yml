@@ -5,20 +5,12 @@ spring:
         format_sql: true
         generate_statistics: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        cache:
-          use_second_level_cache: true
-          use_query_cache: true
-          use_structured_entries: true
-          region:
-            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
-      javax:
-        persistence.sharedCache.mode: ENABLE_SELECTIVE
     show-sql: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/ticket_booking
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: pass
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
 logging:
@@ -27,6 +19,3 @@ logging:
       hibernate:
         SQL: debug
         type: trace
-    net:
-      sf:
-        ehcache=debug:

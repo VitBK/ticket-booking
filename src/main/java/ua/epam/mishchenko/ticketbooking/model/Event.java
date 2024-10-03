@@ -1,17 +1,7 @@
 package ua.epam.mishchenko.ticketbooking.model;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import jakarta.persistence.*;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,8 +15,6 @@ import static ua.epam.mishchenko.ticketbooking.utils.Constants.DATE_FORMATTER;
  */
 @Entity
 @Table(name = "events")
-@Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Event {
 
     /**
