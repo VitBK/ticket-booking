@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import ua.epam.mishchenko.ticketbooking.model.*;
 import ua.epam.mishchenko.ticketbooking.repository.EventRepository;
-import ua.epam.mishchenko.ticketbooking.repository.TicketRepository;
 import ua.epam.mishchenko.ticketbooking.repository.UserAccountRepository;
 import ua.epam.mishchenko.ticketbooking.repository.UserRepository;
 

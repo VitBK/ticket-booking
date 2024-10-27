@@ -16,9 +16,7 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,12 +40,12 @@ public class BookedTicketsPDFControllerTest {
 
     @Test
     public void getBookedTicketsByUserPDFWithNotExistingUserIdShouldThrowException() {
-        when(bookingFacade.getUserById(anyLong())).thenReturn(null);
+        when(bookingFacade.getUserById(anyString())).thenReturn(null);
 
         RuntimeException actualException = assertThrows(RuntimeException.class,
-                () -> bookedTicketsPDFController.getBookedTicketsByUserPDF(1L, 1, 1));
+                () -> bookedTicketsPDFController.getBookedTicketsByUserPDF("1", 1, 1));
 
-        verify(bookingFacade, times(1)).getUserById(anyLong());
+        verify(bookingFacade, times(1)).getUserById(anyString());
         verify(bookingFacade, times(0)).getBookedTickets(any(User.class), anyInt(), anyInt());
         verify(pdfUtils, times(0)).setTickets(any());
         verify(pdfUtils, times(0)).createPDFFileOfBookedTicketsByUser();
@@ -57,13 +55,13 @@ public class BookedTicketsPDFControllerTest {
 
     @Test
     public void getBookedTicketsByUserPDFExistingUserIdAndEmptyListShouldThrowException() {
-        when(bookingFacade.getUserById(anyLong())).thenReturn(new User());
+        when(bookingFacade.getUserById(anyString())).thenReturn(new User());
         when(bookingFacade.getBookedTickets(any(User.class), anyInt(), anyInt())).thenReturn(new ArrayList<>());
 
         RuntimeException actualException = assertThrows(RuntimeException.class,
-                () -> bookedTicketsPDFController.getBookedTicketsByUserPDF(1L, 1, 1));
+                () -> bookedTicketsPDFController.getBookedTicketsByUserPDF("1", 1, 1));
 
-        verify(bookingFacade, times(1)).getUserById(anyLong());
+        verify(bookingFacade, times(1)).getUserById(anyString());
         verify(bookingFacade, times(1)).getBookedTickets(any(User.class), anyInt(), anyInt());
         verify(pdfUtils, times(0)).setTickets(any());
         verify(pdfUtils, times(0)).createPDFFileOfBookedTicketsByUser();
@@ -73,15 +71,15 @@ public class BookedTicketsPDFControllerTest {
 
     @Test
     public void getBookedTicketsByUserPDFExistingUserIdAndNotExistingDocumentShouldThrowException() {
-        when(bookingFacade.getUserById(anyLong())).thenReturn(new User());
+        when(bookingFacade.getUserById(anyString())).thenReturn(new User());
         when(bookingFacade.getBookedTickets(any(User.class), anyInt(), anyInt()))
                 .thenReturn(Collections.singletonList(new Ticket()));
         when(pdfUtils.getPDFDocument()).thenThrow(new RuntimeException());
 
         RuntimeException actualException = assertThrows(RuntimeException.class,
-                () -> bookedTicketsPDFController.getBookedTicketsByUserPDF(1L, 1, 1));
+                () -> bookedTicketsPDFController.getBookedTicketsByUserPDF("1", 1, 1));
 
-        verify(bookingFacade, times(1)).getUserById(anyLong());
+        verify(bookingFacade, times(1)).getUserById(anyString());
         verify(bookingFacade, times(1)).getBookedTickets(any(User.class), anyInt(), anyInt());
         verify(pdfUtils, times(1)).setTickets(any());
         verify(pdfUtils, times(1)).createPDFFileOfBookedTicketsByUser();
@@ -91,14 +89,14 @@ public class BookedTicketsPDFControllerTest {
 
     @Test
     public void getBookedTicketsByUserPDFExistingUserIdShouldReturnDocument() {
-        when(bookingFacade.getUserById(anyLong())).thenReturn(new User());
+        when(bookingFacade.getUserById(anyString())).thenReturn(new User());
         when(bookingFacade.getBookedTickets(any(User.class), anyInt(), anyInt()))
                 .thenReturn(Collections.singletonList(new Ticket()));
         when(pdfUtils.getPDFDocument()).thenReturn(any(InputStreamResource.class));
 
-        ResponseEntity<Object> actualResponseEntity = bookedTicketsPDFController.getBookedTicketsByUserPDF(1L, 1, 1);
+        ResponseEntity<Object> actualResponseEntity = bookedTicketsPDFController.getBookedTicketsByUserPDF("1", 1, 1);
 
-        verify(bookingFacade, times(1)).getUserById(anyLong());
+        verify(bookingFacade, times(1)).getUserById(anyString());
         verify(bookingFacade, times(1)).getBookedTickets(any(User.class), anyInt(), anyInt());
         verify(pdfUtils, times(1)).setTickets(any());
         verify(pdfUtils, times(1)).createPDFFileOfBookedTicketsByUser();

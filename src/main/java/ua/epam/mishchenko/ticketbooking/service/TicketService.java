@@ -21,7 +21,7 @@ public interface TicketService {
      * @param category the category
      * @return the ticket
      */
-    Ticket bookTicket(long userId, long eventId, int place, Category category);
+    Ticket bookTicket(String userId, String eventId, int place, Category category);
 
     /**
      * Gets booked tickets.
@@ -49,5 +49,5 @@ public interface TicketService {
      * @param ticketId the ticket id
      * @return the boolean
      */
-    boolean cancelTicket(long ticketId);
+    boolean cancelTicket(String ticketId);
 }

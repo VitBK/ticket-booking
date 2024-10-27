@@ -1,4 +1,7 @@
 spring:
+  data:
+    mongodb:
+      uri:
   jpa:
     properties:
       hibernate:

@@ -6,5 +6,5 @@ import java.math.BigDecimal;
 
 public interface UserAccountService {
 
-    UserAccount refillAccount(long userId, BigDecimal money);
+    UserAccount refillAccount(String userId, BigDecimal money);
 }

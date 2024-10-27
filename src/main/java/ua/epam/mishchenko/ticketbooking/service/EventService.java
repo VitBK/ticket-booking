@@ -16,7 +16,7 @@ public interface EventService {
      * @param eventId the event id
      * @return the event by id
      */
-    Event getEventById(long eventId);
+    Event getEventById(String eventId);
 
     /**
      * Gets events by title.
@@ -60,5 +60,5 @@ public interface EventService {
      * @param eventId the event id
      * @return the boolean
      */
-    boolean deleteEvent(long eventId);
+    boolean deleteEvent(String eventId);
 }

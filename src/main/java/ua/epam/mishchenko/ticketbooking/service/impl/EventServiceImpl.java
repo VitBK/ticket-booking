@@ -45,7 +45,7 @@ public class EventServiceImpl implements EventService {
      * @return the event by id
      */
     @Override
-    public Event getEventById(long eventId) {
+    public Event getEventById(String eventId) {
         log.info("Finding an event by id: {}", eventId);
         try {
             Event event = eventRepository.findById(eventId)
@@ -199,7 +199,7 @@ public class EventServiceImpl implements EventService {
      * @return the boolean
      */
     @Override
-    public boolean deleteEvent(long eventId) {
+    public boolean deleteEvent(String eventId) {
         log.info("Start deleting an event with id: {}", eventId);
         try {
             eventRepository.deleteById(eventId);

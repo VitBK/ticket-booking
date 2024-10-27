@@ -41,7 +41,7 @@ public class EventsControllerTest {
 
     @Test
     public void showEventByIdWithExistingEventIdShouldReturnModelAndViewWithEvent() {
-        Event event = new Event(1L, "Test event", new Date(System.currentTimeMillis()), BigDecimal.ONE);
+        Event event = new Event("1", "Test event", new Date(System.currentTimeMillis()), BigDecimal.ONE);
 
         when(bookingFacade.getEventById(anyLong())).thenReturn(event);
 
